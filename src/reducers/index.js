@@ -21,15 +21,15 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FEATURE_COST:
       console.log("Payload", action.payload);
+      console.log(state.additionalPrice);
       return {
         ...state,
         additionalPrice: state.additionalPrice + action.payload,
       };
     case ADD_FEATURE_ITEM:
       console.log("Payload item: ", action.payload);
-      return {
-        ...state,
-        car: { features: [...state.car.features, action.payload] },
+      return {...state,
+        car: { ...state.car, features: [...state.car.features, action.payload] },
       };
     default:
       return state;
