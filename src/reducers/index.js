@@ -1,4 +1,4 @@
-import { ADD_ITEM } from "../actions";
+import { ADD_ITEM, REMOVE_ITEM } from "../actions";
 
 export const initialState = {
   additionalPrice: 0,
@@ -18,7 +18,6 @@ export const initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
-  console.log(state.car.features.length);
   switch (action.type) {
     case ADD_ITEM:
       if (state.car.features.indexOf(action.payload.item) === -1) {
@@ -31,80 +30,25 @@ export const reducer = (state = initialState, action) => {
           },
         };
       }
-    // console.log(action.payload);
-    // return {
-    //   ...state,
-    //   car: {
-    //     ...state.car,
-    //     features: state.car.features.map((feature) => {
-    //       console.log(action.payload.item);
-    //       if (action.payload.item !== feature) {
-    //         return {
-    //           ...state,
-    //           // additionalPrice: state.additionalPrice + action.payload.cost,
-    //           car: {
-    //             ...state.car,
-    //             features: [...state.car.features, action.payload.item],
-    //           },
-    //         };
-    //       }
-    //       return feature;
-    //     }),
-    //   },
-    // };
+      return { ...state };
+    case REMOVE_ITEM:
+      let featurePrice;
+      state.additionalFeatures.map((feature) => {
+        if (action.payload === feature.name) {
+          featurePrice = feature.price;
+        }
+        return feature;
+      });
+      const newArr = state.car.features.filter(
+        (feature) => action.payload !== feature
+      );
+      return {
+        ...state,
+        additionalPrice: state.additionalPrice - featurePrice,
+        car: { ...state.car, features: newArr },
+      };
 
     default:
       return state;
   }
 };
-// switch (action.type) {
-//   case ADD_ITEM:
-//     state.car.features.map(feature => {
-//       if(action.payload.item !== feature) {
-//         return {
-//            ...state,
-//       additionalPrice: state.additionalPrice + action.payload.cost,
-//       car: {
-//         ...state.car,
-//         features: [...state.car.features, action.payload.item],
-//       },
-//         }
-//       }
-//     })
-//   default:
-//   return state;}
-
-// return {
-//   ...state,
-//   car: {
-//     ...state.car,
-//     features: state.car.features.map((feature) => {
-//       if (action.payload.item !== feature) {
-//         return { ...feature,
-//           additionalPrice: state.additionalPrice + action.payload.cost,
-//           car: {
-//             ...state.car,
-//             features: [...state.car.features, action.payload.item],
-//           },
-//         };
-//       }
-
-// ...state,
-// additionalPrice: state.additionalPrice + action.payload.cost,
-// car: {
-//   ...state.car,
-//   features: [...state.car.features, action.payload.item],
-// },
-
-// case ADD_FEATURE_COST:
-//   console.log("Payload", action.payload);
-//   return {
-//     ...state,
-//     additionalPrice: state.additionalPrice + action.payload,
-//   };
-// case ADD_FEATURE_ITEM:
-//   console.log("Payload item: ", action.payload);
-//   return {
-//       ...state.car,
-// features: [...state.car.features, action.payload.item],},
-//   };
