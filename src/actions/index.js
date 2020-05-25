@@ -1,16 +1,20 @@
-export const ADD_FEATURE_COST = "ADD_FEATURE_COST";
-export const ADD_FEATURE_ITEM = "ADD_FEATURE_ITEM";
 
-export const addFeatureCost = (cost) => {
+export const ADD_ITEM = "ADD_ITEM";
+export const REMOVE_ITEM = "REMOVE_ITEM";
+
+export const addItem = (item, cost) => {
   return {
-    type: ADD_FEATURE_COST,
-    payload: cost,
+    type: ADD_ITEM,
+    payload: {item, cost}
   };
 };
 
-export const addFeatureItem = (item) => {
+
+
+
+export const removeItem = (item, cost) => {
   return {
-    type: ADD_FEATURE_ITEM,
-    payload: item,
+    type: REMOVE_ITEM,
+    payload: { item, cost },
   };
 };

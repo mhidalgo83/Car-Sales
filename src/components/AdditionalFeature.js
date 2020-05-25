@@ -1,8 +1,9 @@
 import React from "react";
-import { addFeatureCost, addFeatureItem } from "../actions";
+import { addItem } from "../actions";
 import { connect } from "react-redux";
 
 const AdditionalFeature = (props) => {
+  console.log(props);
   return (
     <li>
       {/* Add an onClick that will let you add a feature to your car */}
@@ -10,8 +11,7 @@ const AdditionalFeature = (props) => {
         className="button"
         onClick={(e) => {
           e.preventDefault();
-          props.addFeatureItem(props.feature.name);
-          props.addFeatureCost(props.feature.price);
+          props.addItem(props.feature.name, props.feature.price);
         }}
       >
         Add
@@ -21,6 +21,4 @@ const AdditionalFeature = (props) => {
   );
 };
 
-export default connect(null, { addFeatureCost, addFeatureItem })(
-  AdditionalFeature
-);
+export default connect(null, { addItem })(AdditionalFeature);
