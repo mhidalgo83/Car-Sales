@@ -18,30 +18,93 @@ export const initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
+  console.log(state.car.features.length);
   switch (action.type) {
     case ADD_ITEM:
-      return {
-        
-        ...state,
-        additionalPrice: state.additionalPrice + action.payload.cost,
-        car: {
-          ...state.car,
-          features: [...state.car.features, action.payload.item],
-        },
-      };
-    // case ADD_FEATURE_COST:
-    //   console.log("Payload", action.payload);
-    //   return {
-    //     ...state,
-    //     additionalPrice: state.additionalPrice + action.payload,
-    //   };
-    // case ADD_FEATURE_ITEM:
-    //   console.log("Payload item: ", action.payload);
-    //   return {
-    //       ...state.car,
-    // features: [...state.car.features, action.payload.item],},
-    //   };
+      if (state.car.features.indexOf(action.payload.item) === -1) {
+        return {
+          ...state,
+          additionalPrice: state.additionalPrice + action.payload.cost,
+          car: {
+            ...state.car,
+            features: [...state.car.features, action.payload.item],
+          },
+        };
+      }
+    // console.log(action.payload);
+    // return {
+    //   ...state,
+    //   car: {
+    //     ...state.car,
+    //     features: state.car.features.map((feature) => {
+    //       console.log(action.payload.item);
+    //       if (action.payload.item !== feature) {
+    //         return {
+    //           ...state,
+    //           // additionalPrice: state.additionalPrice + action.payload.cost,
+    //           car: {
+    //             ...state.car,
+    //             features: [...state.car.features, action.payload.item],
+    //           },
+    //         };
+    //       }
+    //       return feature;
+    //     }),
+    //   },
+    // };
+
     default:
       return state;
   }
 };
+// switch (action.type) {
+//   case ADD_ITEM:
+//     state.car.features.map(feature => {
+//       if(action.payload.item !== feature) {
+//         return {
+//            ...state,
+//       additionalPrice: state.additionalPrice + action.payload.cost,
+//       car: {
+//         ...state.car,
+//         features: [...state.car.features, action.payload.item],
+//       },
+//         }
+//       }
+//     })
+//   default:
+//   return state;}
+
+// return {
+//   ...state,
+//   car: {
+//     ...state.car,
+//     features: state.car.features.map((feature) => {
+//       if (action.payload.item !== feature) {
+//         return { ...feature,
+//           additionalPrice: state.additionalPrice + action.payload.cost,
+//           car: {
+//             ...state.car,
+//             features: [...state.car.features, action.payload.item],
+//           },
+//         };
+//       }
+
+// ...state,
+// additionalPrice: state.additionalPrice + action.payload.cost,
+// car: {
+//   ...state.car,
+//   features: [...state.car.features, action.payload.item],
+// },
+
+// case ADD_FEATURE_COST:
+//   console.log("Payload", action.payload);
+//   return {
+//     ...state,
+//     additionalPrice: state.additionalPrice + action.payload,
+//   };
+// case ADD_FEATURE_ITEM:
+//   console.log("Payload item: ", action.payload);
+//   return {
+//       ...state.car,
+// features: [...state.car.features, action.payload.item],},
+//   };
