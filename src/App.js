@@ -6,7 +6,7 @@ import AdditionalFeatures from "./components/AdditionalFeatures";
 import Total from "./components/Total";
 import { useSelector } from "react-redux";
 
-const App = (props) => {
+const App = () => {
   const { car, additionalFeatures, additionalPrice } = useSelector(
     (state) => state
   );
@@ -23,15 +23,5 @@ const App = (props) => {
     </div>
   );
 };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     car: state.car,
-//     additionalFeatures: state.additionalFeatures,
-//     additionalPrice: state.additionalPrice,
-//   };
-// };
-
-// export default connect(mapStateToProps, {})(App);
 
 export default App;

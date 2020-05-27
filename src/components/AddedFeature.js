@@ -1,13 +1,17 @@
 import React from "react";
 import { removeItem } from "../actions";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const AddedFeature = (props) => {
-  console.log(props)
+  const dispatch = useDispatch();
+  console.log(props);
   return (
     <li>
       {/* Add an onClick to run a function to remove a feature */}
-      <button className="button" onClick={(e) => props.removeItem(props.feature)}>
+      <button
+        className="button"
+        onClick={() => dispatch(removeItem(props.feature))}
+      >
         X
       </button>
       {props.feature}
@@ -15,4 +19,4 @@ const AddedFeature = (props) => {
   );
 };
 
-export default connect(null, { removeItem })(AddedFeature);
+export default AddedFeature;
